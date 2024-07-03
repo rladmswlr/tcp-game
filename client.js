@@ -7,13 +7,6 @@ const PACKET_TYPE_LENGTH = 1; // 패킷타입을 나타내는 1바이트
 let userId;
 let sequence;
 
-const readHeader = (buffer) => {
-  return {
-    length: buffer.readUInt32BE(0),
-    packetType: buffer.writeUInt8(TOTAL_LENGTH),
-  };
-};
-
 const createPacket = (handlerId, payload, clientVersion = '1.0.0', type, name) => {
   const protoMessages = getProtoMessages();
   const PayloadType = protoMessages[type][name];
@@ -59,7 +52,7 @@ const sendPacket = (socket, packet) => {
 };
 
 // 서버에 연결할 호스트와 포트
-const HOST = 'localhost';
+const HOST = '127.0.0.1';
 const PORT = 5555;
 
 const client = new net.Socket();
@@ -80,7 +73,7 @@ client.on('data', (data) => {
 
   // 2. 패킷 타입 정보 수신 (1바이트)
   const packetType = data.readUInt8(4);
-  const packet = data.slice(totalHeaderLength, totalHeaderLength + length); // 패킷 데이터
+  const packet = data.slice(totalHeaderLength, length); // 패킷 데이터
 
   if (packetType === 1) {
     const protoMessages = getProtoMessages();
