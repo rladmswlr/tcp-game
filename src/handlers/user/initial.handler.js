@@ -9,14 +9,13 @@ const initialHandler = async ({ socket, userId, payload }) => {
     const { deviceId } = payload;
 
     let user = await findUserByDeviceID(deviceId);
-
     if (!user) {
       user = await createUser(deviceId);
     } else {
       await updateUserLogin(user.id);
     }
 
-    addUser(user.id, socket);
+    addUser(socket, user.id);
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
