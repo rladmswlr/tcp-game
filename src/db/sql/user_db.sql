@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS user
 (
     id         VARCHAR(36) PRIMARY KEY,
     device_id  VARCHAR(255) UNIQUE NOT NULL,
+    x          INT DEFAULT 0,
+    y          INT DEFAULT 0,
     last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
