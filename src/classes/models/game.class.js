@@ -23,11 +23,6 @@ class Game {
     return this.users.find((user) => user.id === userId);
   }
 
-  getAllUserIds() {
-    const userIds = this.users.map((user) => user.id);
-    return userIds;
-  }
-
   removeUser(userId) {
     this.users = this.users.filter((user) => user.id !== userId);
 

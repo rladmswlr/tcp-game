@@ -2,7 +2,7 @@ import { addUser, getUserById } from '../../session/user.session.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 import { createResponse } from '../../utils/response/createResponse.js';
 import { handleError } from '../../utils/error/errorHandler.js';
-import { getAllGameSessions, getGameSession } from '../../session/game.session.js';
+import { getGameSession } from '../../session/game.session.js';
 import CustomError from '../../utils/error/customError.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
@@ -21,14 +21,10 @@ const initialHandler = async ({ socket, userId, payload }) => {
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }
-    console.log(user);
     const existUser = gameSession.getUser(user.id);
     if (!existUser) {
       gameSession.addUser(user);
     }
-
-    console.log('get Game ALL SECTION : ', getAllGameSessions());
-    console.log('get All Users Ids : ', gameSession.getAllUserIds());
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
