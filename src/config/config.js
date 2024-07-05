@@ -1,4 +1,4 @@
-import { PORT, HOST, CLIENT_VERSION } from '../constants/env.js';
+import { PORT, HOST, CLIENT_VERSION, Room_ID } from '../constants/env.js';
 import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants/header.js';
 import {
   DB1_NAME,
@@ -41,5 +41,8 @@ export const config = {
       port: DB2_PORT,
     },
     // 필요한 만큼 추가
+  },
+  game_data: {
+    room: Room_ID,
   },
 };
