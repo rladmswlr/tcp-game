@@ -4,14 +4,13 @@ import { createResponse } from '../../utils/response/createResponse.js';
 import { handleError } from '../../utils/error/errorHandler.js';
 import { getAllGameSessions, getGameSession } from '../../session/game.session.js';
 import CustomError from '../../utils/error/customError.js';
-import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
     let { deviceId, playerId, latency } = payload;
 
     addUser(socket, deviceId, playerId, latency);
-    console.log(`deviceId : ${deviceId} , playerId : ${playerId}, latency: ${latency}`);
+
     const gameSession = getGameSession();
 
     if (!gameSession) {
@@ -22,8 +21,8 @@ const initialHandler = async ({ socket, userId, payload }) => {
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }
+    console.log(user);
     const existUser = gameSession.getUser(user.id);
-    console.log(existUser);
     if (!existUser) {
       gameSession.addUser(user);
     }

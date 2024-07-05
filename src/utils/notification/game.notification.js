@@ -20,7 +20,7 @@ const makeNotification = (message, type) => {
 
 export const createLocationUpdate = (users) => {
   const protoMessages = getProtoMessages();
-  const Location = protoMessages.gameNotification.UserLocation;
+  const Location = protoMessages.gameNotification.UserLocationUpdate;
 
   const payload = { users };
   // proto 에서 create 는 인자로 받은 payload 를 객체(메시지) 형식으로 변환해준다.

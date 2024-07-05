@@ -33,23 +33,6 @@ class User {
   getPosition() {
     return { x: this.x, y: this.y };
   }
-
-  // 추측항법을 사용하여 위치를 추정하는 메서드
-  calculatePosition() {
-    const timeDiff = this.latency / 1000; // 레이턴시(ms)를 초(s) 단위로 계산
-    const speed = 3; // 클라이언트의 속도가 3으로 설정되어있음
-    const frame = 1 / 30; // 클라이언트가 30 fps 를 가지고 있음
-    // distance(거리) = speed(속도) * timeDiff(시간)
-    const distance = speed * frame + speed * frame * timeDiff;
-
-    this.x = this.x + distance * this.directionX;
-    this.y = this.y + distance * this.directionY;
-
-    return {
-      x: this.x,
-      y: this.y,
-    };
-  }
 }
 
 export default User;

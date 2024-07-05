@@ -1,5 +1,4 @@
 import { createLocationUpdate } from '../../utils/notification/game.notification.js';
-import IntervalManager from '../managers/interval.manager.js';
 
 const MAX_PLAYERS = 10;
 
@@ -7,7 +6,6 @@ class Game {
   constructor(id) {
     this.id = id;
     this.users = [];
-    this.intervalManager = new IntervalManager();
     this.state = 'waiting'; // 'waiting', 'inProgress'
   }
 
@@ -32,7 +30,6 @@ class Game {
 
   removeUser(userId) {
     this.users = this.users.filter((user) => user.id !== userId);
-    this.intervalManager.removePlayer(userId);
 
     if (this.users.length < MAX_PLAYERS) this.state = 'waiting';
   }
@@ -55,10 +52,10 @@ class Game {
     // const maxLatency = this.getMaxLatency(); // 전체 유저의 최대 레이턴시 구하기
 
     const locationData = this.users
-      .filter((user) => user.deviceId !== userId)
+      .filter((user) => user.id !== userId)
       .map((user) => {
         const { x, y } = user.getPosition();
-        return { id: user.deviceId, playerId: user.playerId, x, y };
+        return { id: user.id, playerId: user.playerId, x, y };
       });
     return createLocationUpdate(locationData);
   }
