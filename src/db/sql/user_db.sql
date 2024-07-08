@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS user
 (
-    id         VARCHAR(36) PRIMARY KEY,
-    device_id  VARCHAR(255) UNIQUE NOT NULL,
+    device_id  VARCHAR(255) UNIQUE PRIMARY KEY,
+    game_id  VARCHAR(255) NOT NULL,
     x          INT DEFAULT 0,
     y          INT DEFAULT 0,
     last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS game_end
     start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     end_time   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     score      INT       DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES user (id)
+    FOREIGN KEY (user_id) REFERENCES user (device_id)
 );

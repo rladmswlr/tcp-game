@@ -13,6 +13,10 @@ const handlers = {
     handler: locationUpdateHandler,
     protoType: 'game.LocationUpdatePayload',
   },
+  [HANDLER_IDS]: {
+    handler: locationUpdateHandler,
+    protoType: 'game.LocationUpdatePayload',
+  },
 };
 
 export const getHandlerById = (handlerId) => {

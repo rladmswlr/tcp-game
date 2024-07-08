@@ -37,6 +37,7 @@ export const onData = (socket) => async (data) => {
               userId,
               payload,
             });
+            break;
         }
       } catch (error) {
         handleError(socket, error);

@@ -8,10 +8,13 @@ export const findUserByDeviceID = async (deviceId) => {
   return toCamelCase(rows[0]);
 };
 
-export const createUser = async (deviceId) => {
-  const id = uuidv4();
-  await pools.USER_DB.query(SQL_QUERIES.CREATE_USER, [id, deviceId]);
-  return { id, deviceId };
+export const createUser = async (deviceId, gameId) => {
+  await pools.USER_DB.query(SQL_QUERIES.CREATE_USER, [deviceId, gameId, 0, 0]);
+  return { deviceId, gameId };
+};
+
+export const updateUser = async (x, y, deviceId) => {
+  await pools.USER_DB.query(SQL_QUERIES.UPDATE_USER, [x, y, deviceId]);
 };
 
 export const updateUserLogin = async (id) => {

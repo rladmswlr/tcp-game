@@ -30,6 +30,17 @@ export const createLocationUpdate = (users) => {
   return makeNotification(locationPacket, PACKET_TYPE.LOCATION);
 };
 
+export const createStartLocate = (playerId, deviceId, x, y) => {
+  const protoMessages = getProtoMessages();
+  const startLocate = protoMessages.location.StartUserLocation;
+
+  const payload = { playerId, deviceId, x, y };
+  const message = startLocate.create(payload);
+
+  const startLocationPacket = startLocate.encode(message).finish();
+  return makeNotification(startLocationPacket, PACKET_TYPE.STARTLOCATE);
+};
+
 export const createPingPacket = (timestamp) => {
   const protoMessages = getProtoMessages();
   const ping = protoMessages.common.Ping;
